@@ -1,7 +1,7 @@
-package Sorting.LeetCodeInterviewQuestions;
+package Basic_Sorting.LeetCodeInterviewQuestions;
 
-public class SelectionSort {
-
+public class BubbleSort {
+    
     private Node head;
     private Node tail;
     private int length;
@@ -15,7 +15,7 @@ public class SelectionSort {
         }
     }
 
-    public SelectionSort(int value) { //LinkedList structure for SelectionSort
+    public BubbleSort(int value) { //LinkedList structure for Bubblesort
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -43,7 +43,7 @@ public class SelectionSort {
     public void printList() {
         Node temp = head;
         while (temp != null) {
-            System.out.print(temp.value+" ");
+            System.out.println(temp.value);
             temp = temp.next;
         }
     }
@@ -60,30 +60,27 @@ public class SelectionSort {
         length++;
     }
     
-    void selectionSort(){
+    void bubbleSort(){
         if(this.length < 2)
-            return;
-        Node current = this.head;
-        while(current.next != null){
-            Node smallest = current;
-            Node innerCurrent = current.next;
-            while(innerCurrent != null){
-               if(innerCurrent.value < smallest.value){
-                  smallest = innerCurrent;
-               }
-            innerCurrent = innerCurrent.next;
+        return;
+        Node SortedUntil = null;
+        while (SortedUntil != this.head.next){
+            Node current = this.head;
+            while(current.next != SortedUntil){
+                Node nextNode = current.next;
+                if(current.value > nextNode.value){
+                    int temp = current.value;
+                    current.value = nextNode.value;
+                    nextNode.value = temp;
+                }
+                current = current.next;
             }
-            if(smallest != current){
-                int temp = current.value;
-                current.value = smallest.value;
-                smallest.value = temp;
-            }
-            current = current.next;
+            SortedUntil = current;
         }
     }
 
     public static void main(String[] args) {
-        SelectionSort myLinkedList = new SelectionSort(4);
+        BubbleSort myLinkedList = new BubbleSort(4);
         myLinkedList.append(2);
         myLinkedList.append(6);
         myLinkedList.append(5);
@@ -95,7 +92,7 @@ public class SelectionSort {
         System.out.println("Unsorted Linked List:");
         myLinkedList.printList();
 
-        myLinkedList.selectionSort();
+        myLinkedList.bubbleSort();
 
         System.out.println("\nSorted Linked List:");
         myLinkedList.printList();
@@ -123,5 +120,4 @@ public class SelectionSort {
 
         */
     }
-
 }

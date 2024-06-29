@@ -1,4 +1,4 @@
-package Sorting.LeetCodeInterviewQuestions;
+package Basic_Sorting.LeetCodeInterviewQuestions;
 
 public class InsertionSort {
     
