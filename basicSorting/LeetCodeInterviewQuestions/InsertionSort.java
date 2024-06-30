@@ -1,6 +1,6 @@
-package Basic_Sorting.LeetCodeInterviewQuestions;
+package basicSorting.LeetCodeInterviewQuestions;
 
-public class BubbleSort {
+public class InsertionSort {
     
     private Node head;
     private Node tail;
@@ -15,7 +15,7 @@ public class BubbleSort {
         }
     }
 
-    public BubbleSort(int value) { //LinkedList structure for Bubblesort
+    public InsertionSort(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -43,7 +43,7 @@ public class BubbleSort {
     public void printList() {
         Node temp = head;
         while (temp != null) {
-            System.out.println(temp.value);
+            System.out.print(temp.value+ " ");
             temp = temp.next;
         }
     }
@@ -60,27 +60,39 @@ public class BubbleSort {
         length++;
     }
     
-    void bubbleSort(){
-        if(this.length < 2)
+    public void insertionSort(){
+        if(length < 2)
         return;
-        Node SortedUntil = null;
-        while (SortedUntil != this.head.next){
-            Node current = this.head;
-            while(current.next != SortedUntil){
-                Node nextNode = current.next;
-                if(current.value > nextNode.value){
-                    int temp = current.value;
-                    current.value = nextNode.value;
-                    nextNode.value = temp;
-                }
-                current = current.next;
-            }
-            SortedUntil = current;
+        Node sortedListHead = head;
+        Node unSortedListHead = head.next;
+        sortedListHead.next = null;
+        while(unSortedListHead != null){
+            Node current = unSortedListHead;
+            unSortedListHead = unSortedListHead.next;
+            if(current.value < sortedListHead.value){
+                current.next = sortedListHead;
+                sortedListHead = current;
+            }else{
+                Node searchPointer = sortedListHead;
+        
+        while(searchPointer.next != null && current.value > searchPointer.next.value){
+            searchPointer = searchPointer.next;
         }
+        current.next = searchPointer.next;
+        searchPointer.next = current;
+        }
+        }
+        head = sortedListHead;
+        Node temp = head;
+        while (temp.next != null){
+            temp = temp.next;
+        }
+        tail = temp;
+        
     }
 
     public static void main(String[] args) {
-        BubbleSort myLinkedList = new BubbleSort(4);
+          InsertionSort myLinkedList = new InsertionSort(4);
         myLinkedList.append(2);
         myLinkedList.append(6);
         myLinkedList.append(5);
@@ -88,16 +100,13 @@ public class BubbleSort {
         myLinkedList.append(3);
 
 
-
         System.out.println("Unsorted Linked List:");
         myLinkedList.printList();
 
-        myLinkedList.bubbleSort();
+        myLinkedList.insertionSort();
 
         System.out.println("\nSorted Linked List:");
         myLinkedList.printList();
-
-
 
         /*
             EXPECTED OUTPUT:
@@ -119,5 +128,6 @@ public class BubbleSort {
             6
 
         */
+
     }
 }
