@@ -51,7 +51,6 @@ public class MergeSort {
     public static void main(String[] args) {
 
         int[] originalArray = {3,1,4,2};
-
         int [] sortedArray = mergeSort(originalArray);
 
         System.out.println( "Original Array: " + Arrays.toString( originalArray ) );
